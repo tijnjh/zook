@@ -1,11 +1,9 @@
 <script lang="ts">
 	let { data }: { data: any } = $props();
+	import { page } from '$app/state';
+
 	const r = data.data;
 
-	import { page } from '$app/state';
-	console.log('1234');
-
-	
 	// somehow this actually makes routing work properly
 	// svelte really is goated
 	$effect(() => $page.params.slug);
