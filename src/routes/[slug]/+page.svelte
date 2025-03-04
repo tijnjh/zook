@@ -19,9 +19,7 @@
 
 <main class="grid max-w-3xl grid-cols-1 gap-6 p-6 lg:[margin-left:min(calc(20vw/2),10rem)]">
 	<aside>
-		<a href={r.AbstractURL}>
-			<h1 class="text-nord6/50 mb-6">-> {r.Heading}</h1>
-		</a>
+		<h1 class="text-nord6/50 mb-6">{r.Heading}</h1>
 		<div class="flex flex-col gap-6 md:flex-row">
 			{#if r.Image}
 				<img
@@ -35,6 +33,10 @@
 				{r.Abstract}
 			</p>
 		</div>
+
+		<a href={r.AbstractURL} class="text-nord6/50 block">
+			-> from {r.AbstractSource}
+		</a>
 	</aside>
 
 	{#if r.RelatedTopics}
