@@ -1,6 +1,5 @@
 <script lang="ts">
 	let { data }: { data: any } = $props();
-	import { browser } from '$app/environment';
 	import { page } from '$app/state';
 
 	import Search from 'lucide-svelte/icons/search';
@@ -16,7 +15,7 @@
 <svelte:head>
 	{#if r.Abstract}
 		<meta name="description" content={r.Abstract} />
-		<title>{r.Heading}</title>
+		<title>{r.Heading ?? 'Zook'}</title>
 		<meta name="og:image" content={`https://duckduckgo.com${r.Image}`} />
 	{/if}
 </svelte:head>
