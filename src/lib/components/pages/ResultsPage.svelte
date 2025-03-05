@@ -58,7 +58,7 @@
               <Link class="size-4 shrink-0" />
 
               <span class="truncate group-hover:underline">
-                {result.FirstURL}
+                {new URL(result.FirstURL).hostname}
               </span>
             </a>
           </li>
