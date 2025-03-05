@@ -3,6 +3,7 @@
 
   import HomePage from "$lib/components/pages/HomePage.svelte";
   import ResultsPage from "$lib/components/pages/ResultsPage.svelte";
+  import ResultsShell from "$lib/components/ResultsShell.svelte";
 
   import "@fontsource/inter";
   import "../app.css";
@@ -15,5 +16,7 @@
 {#if !qParam}
   <HomePage />
 {:else}
-  <ResultsPage response={data.data} query={qParam} />
+  <ResultsShell query={qParam}>
+    <ResultsPage response={data.data} query={qParam} />
+  </ResultsShell>
 {/if}
