@@ -50,8 +50,8 @@
             <Link class="size-4 shrink-0" />
 
             <span class="truncate group-hover:underline">
-              {url.hostname.replace("www.", "")}
-              {stripTrailingSlash(url.pathname)}
+              {url.hostname.replace("www.", "") +
+                stripTrailingSlash(url.pathname)}
             </span>
           </a>
         </li>
