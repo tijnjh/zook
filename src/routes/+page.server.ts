@@ -6,8 +6,9 @@ async function fetchResults(query: string) {
     return response;
 }
 
-export const load: PageServerLoad = async ({ params }: any) => {
-    const results = await fetchResults(params.slug)
+export const load: PageServerLoad = async (e: any) => {
+    const results = await fetchResults(e.url.searchParams.get("q"))
+
 	return {
 		data: results
 	};
