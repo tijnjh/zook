@@ -53,7 +53,7 @@
     </aside>
   {/if}
 
-  {#if response.Results}
+  {#if response.Results.length}
     <h2 class="text-nord6/50">links</h2>
 
     <ul>
@@ -73,7 +73,7 @@
     </ul>
   {/if}
 
-  {#if response.RelatedTopics}
+  {#if response.RelatedTopics.length}
     <h2 class="text-nord6/50">related queries</h2>
 
     <ul>
