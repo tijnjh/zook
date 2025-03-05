@@ -75,10 +75,7 @@
             <a href={`/?q=${q}`} class="group flex items-center gap-2">
               <Search class="size-4 shrink-0" />
               <div class="truncate">
-                <span
-                  class="truncate group-hover:underline"
-                  style={`view-transition-name: ${decodeURIComponent(q).replaceAll(" ", "_")}`}
-                >
+                <span class="truncate group-hover:underline">
                   {decodeURIComponent(q)}
                 </span>
               </div>
