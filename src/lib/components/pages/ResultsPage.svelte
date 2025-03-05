@@ -2,6 +2,10 @@
   let { response, query }: { response: any; query: string } = $props();
   import Search from "lucide-svelte/icons/search";
   import Link from "lucide-svelte/icons/link";
+
+  function stripTrailingSlash(str: string) {
+    return str.endsWith("/") ? str.slice(0, -1) : str;
+  }
 </script>
 
 <svelte:head>
@@ -39,13 +43,15 @@
 
   <ul>
     {#each response.Results as result}
+      {@const url = new URL(result.FirstURL)}
       {#if result.FirstURL}
         <li class="mb-6">
           <a href={result.FirstURL} class="group flex items-center gap-2">
             <Link class="size-4 shrink-0" />
 
             <span class="truncate group-hover:underline">
-              {new URL(result.FirstURL).hostname}
+              {url.hostname.replace("www.", "")}
+              {stripTrailingSlash(url.pathname)}
             </span>
           </a>
         </li>
