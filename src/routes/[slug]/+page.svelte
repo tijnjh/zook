@@ -10,6 +10,8 @@
 	// somehow this actually makes routing work properly
 	// svelte really is goated
 	$effect(() => $page.params.slug);
+
+	const query = decodeURIComponent(page.url.pathname).replaceAll('/', '');
 </script>
 
 <svelte:head>
@@ -21,9 +23,11 @@
 </svelte:head>
 
 <main class="grid max-w-3xl grid-cols-1 gap-6 p-6 lg:[margin-left:min(calc(20vw/2),10rem)]">
-	<a href="/" class="text-nord6/50 mb-6 flex items-center gap-2">
-		<Search class="size-4" />
-		<span>{decodeURIComponent(page.url.pathname).replaceAll('/', '')}</span>
+	<a href="/" class="mb-6 flex items-center gap-2">
+		?
+		<span class="text-nord6/50" style={`view-transition-name: ${query.replaceAll(' ', '_')}`}>
+			{query}
+		</span>
 	</a>
 
 	{#if r.Heading}
@@ -74,20 +78,22 @@
 		<ul>
 			{#each r.RelatedTopics as topic}
 				{#if topic.FirstURL}
-					{@const query = topic.FirstURL.split('/')
-						.reverse()[0]
-						.replaceAll('_', '%20')
-						.toLowerCase()}
-					<li class="mb-6">
-						<a href={`/${query}`} class="group flex items-center gap-2">
-							<Search class="size-4 shrink-0" />
-							<div class="truncate">
-								<span class="truncate group-hover:underline">
-									{topic.Text.split(' - ')[0]}
-								</span>
-							</div>
-						</a>
-					</li>
+					{@const q = topic.FirstURL.split('/').reverse()[0].replaceAll('_', '%20').toLowerCase()}
+					{#if decodeURIComponent(q) !== query}
+						<li class="mb-6">
+							<a href={`/${q}`} class="group flex items-center gap-2">
+								<Search class="size-4 shrink-0" />
+								<div class="truncate">
+									<span
+										class="truncate group-hover:underline"
+										style={`view-transition-name: ${decodeURIComponent(q).replaceAll(' ', '_')}`}
+									>
+										{decodeURIComponent(q)}
+									</span>
+								</div>
+							</a>
+						</li>
+					{/if}
 				{/if}
 			{/each}
 		</ul>
