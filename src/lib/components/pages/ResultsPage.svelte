@@ -1,13 +1,7 @@
 <script lang="ts">
-  let { response }: { response: any } = $props();
-  import { page } from "$app/state";
-
+  let { response, query }: { response: any; query: string } = $props();
   import Search from "lucide-svelte/icons/search";
   import Link from "lucide-svelte/icons/link";
-
-  const query = decodeURIComponent(page.url.pathname).replaceAll("/", "");
-
-  console.log(response);
 </script>
 
 <svelte:head>
