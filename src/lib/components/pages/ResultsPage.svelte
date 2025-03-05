@@ -58,7 +58,7 @@
               <Link class="size-4 shrink-0" />
 
               <span class="truncate group-hover:underline">
-                {result.Text}
+                {result.FirstURL}
               </span>
             </a>
           </li>
