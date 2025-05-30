@@ -1,6 +1,7 @@
 import ResultsShell from "@/components/ResultsShell";
 import { tryCatch } from "easy-try-catch";
 import { Metadata } from "next";
+import { redirect } from "next/navigation";
 import { ItunesResult, searchItunes } from "node-itunes-search";
 import { Fragment } from "react";
 
@@ -25,7 +26,7 @@ export async function generateMetadata({ searchParams }: Props) {
       media: "music",
       entity: "song",
       limit: "5",
-    }),
+    })
   );
 
   let metadata: Metadata = {
@@ -60,7 +61,9 @@ export default async function Music({
 }) {
   const query = (await searchParams).q as string;
 
-  if (query) {
+  if (!query) {
+    redirect("/");
+  } else {
     const { results: tracks } = await searchItunes({
       term: query,
       media: "music",
@@ -71,74 +74,74 @@ export default async function Music({
     return (
       <ResultsShell query={query} currentTab="music">
         {tracks.map((track) =>
-          track.trackName
-            ? (
-              (() => {
-                const trackSearchQuery = getTrackSearchQuery(track);
-                const trackReleaseYear = getTrackReleaseYear(track);
+          track.trackName ? (
+            (() => {
+              const trackSearchQuery = getTrackSearchQuery(track);
+              const trackReleaseYear = getTrackReleaseYear(track);
 
-                return (
-                  <Fragment key={track.trackId}>
-                    <div className="items-center gap-4 grid grid-cols-[max-content,1fr]">
-                      <img
-                        className="rounded size-32"
-                        src={track.artworkUrl100}
-                        alt={`${track.trackName} album cover`}
-                      />
-                      <hgroup>
-                        <h2 className="m-0">{track.trackName}</h2>
-                        <p className="m-0">{track.artistName}</p>
-                        <p className="m-0">{track.collectionName}</p>
-                        <p className="m-0">
-                          {track.primaryGenreName} &bull; {trackReleaseYear}
-                        </p>
-                      </hgroup>
-                    </div>
+              return (
+                <Fragment key={track.trackId}>
+                  <div className="items-center gap-4 grid grid-cols-[max-content,1fr]">
+                    <img
+                      className="rounded size-32"
+                      src={track.artworkUrl100}
+                      alt={`${track.trackName} album cover`}
+                    />
+                    <hgroup>
+                      <h2 className="m-0">{track.trackName}</h2>
+                      <p className="m-0">{track.artistName}</p>
+                      <p className="m-0">{track.collectionName}</p>
+                      <p className="m-0">
+                        {track.primaryGenreName} &bull; {trackReleaseYear}
+                      </p>
+                    </hgroup>
+                  </div>
 
-                    <div>
-                      <audio controls>
-                        <source src={track.previewUrl} type="audio/mpeg" />
-                        Your browser does not support the audio element.
-                      </audio>
-                    </div>
+                  <div>
+                    <audio controls>
+                      <source src={track.previewUrl} type="audio/mpeg" />
+                      Your browser does not support the audio element.
+                    </audio>
+                  </div>
 
-                    <div className="flex flex-wrap gap-2">
-                      <PlatformButton
-                        name="Spotify"
-                        url="https://open.spotify.com/search/"
-                        trackSearchQuery={trackSearchQuery}
-                      />
-                      <PlatformButton
-                        name="Apple Music"
-                        url="https://music.apple.com/us/search?term="
-                        trackSearchQuery={trackSearchQuery}
-                      />
-                      <PlatformButton
-                        name="YouTube Music"
-                        url="https://music.youtube.com/search?q="
-                        trackSearchQuery={trackSearchQuery}
-                      />
-                      <PlatformButton
-                        name="YouTube"
-                        url="https://www.youtube.com/results?search_query="
-                        trackSearchQuery={trackSearchQuery}
-                      />
-                      <PlatformButton
-                        name="SoundCloud"
-                        url="https://soundcloud.com/search?q="
-                        trackSearchQuery={trackSearchQuery}
-                      />
-                      <PlatformButton
-                        name="Deezer"
-                        url="https://www.deezer.com/search/"
-                        trackSearchQuery={trackSearchQuery}
-                      />
-                    </div>
-                  </Fragment>
-                );
-              })()
-            )
-            : <h3>No song found :(</h3>
+                  <div className="flex flex-wrap gap-2">
+                    <PlatformButton
+                      name="Spotify"
+                      url="https://open.spotify.com/search/"
+                      trackSearchQuery={trackSearchQuery}
+                    />
+                    <PlatformButton
+                      name="Apple Music"
+                      url="https://music.apple.com/us/search?term="
+                      trackSearchQuery={trackSearchQuery}
+                    />
+                    <PlatformButton
+                      name="YouTube Music"
+                      url="https://music.youtube.com/search?q="
+                      trackSearchQuery={trackSearchQuery}
+                    />
+                    <PlatformButton
+                      name="YouTube"
+                      url="https://www.youtube.com/results?search_query="
+                      trackSearchQuery={trackSearchQuery}
+                    />
+                    <PlatformButton
+                      name="SoundCloud"
+                      url="https://soundcloud.com/search?q="
+                      trackSearchQuery={trackSearchQuery}
+                    />
+                    <PlatformButton
+                      name="Deezer"
+                      url="https://www.deezer.com/search/"
+                      trackSearchQuery={trackSearchQuery}
+                    />
+                  </div>
+                </Fragment>
+              );
+            })()
+          ) : (
+            <h3>No song found :(</h3>
+          )
         )}
       </ResultsShell>
     );
