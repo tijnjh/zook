@@ -28,3 +28,10 @@ body {
   @apply bg-nord10 text-nord6 cursor-pointer rounded-md px-4 py-2 text-sm
     hover:opacity-80 active:translate-y-px;
 }
+
+[data-rmiz-modal-overlay="hidden"] {
+  background-color: #00000000 !important;
+}
+[data-rmiz-modal-overlay="visible"] {
+  background-color: #000 !important;
+}
