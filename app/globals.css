@@ -25,5 +25,6 @@ body {
 }
 
 .btn {
-  @apply bg-nord10 text-nord6 cursor-pointer rounded-md px-4 py-2 text-sm hover:opacity-80 active:translate-y-px;
+  @apply bg-nord10 text-nord6 cursor-pointer rounded-md px-4 py-2 text-sm
+    hover:opacity-80 active:translate-y-px;
 }

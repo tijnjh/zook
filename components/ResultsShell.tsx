@@ -21,9 +21,9 @@ export default function ResultsShell({
             <li>
               <Link
                 href={`/?q=${query}`}
-                className={
-                  !!(currentTab === "default") ? "" : "not-hover:opacity-50"
-                }
+                className={currentTab === "default"
+                  ? ""
+                  : "not-hover:opacity-50"}
               >
                 web
               </Link>
@@ -31,9 +31,7 @@ export default function ResultsShell({
             <li>
               <Link
                 href={`/music?q=${query}`}
-                className={
-                  !!(currentTab === "music") ? "" : "not-hover:opacity-50"
-                }
+                className={currentTab === "music" ? "" : "not-hover:opacity-50"}
               >
                 music
               </Link>
