@@ -1,5 +1,6 @@
 import ResultsShell from "@/components/ResultsShell";
-import { DdgResponse } from "@/lib/types";
+import { tryCatch } from "easy-try-catch";
+import { Metadata } from "next";
 import { searchItunes } from "node-itunes-search";
 import { Fragment } from "react";
 
@@ -9,6 +10,47 @@ function getTrackSearchQuery(track: any): string {
 
 function getTrackReleaseYear(track: any): string {
   return track.trackName ? track.releaseDate.split("-")[0] : "0";
+}
+
+interface Props {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
+export async function generateMetadata({ searchParams }: Props) {
+  const query = (await searchParams).q as string;
+
+  const { data, error } = await tryCatch(
+    searchItunes({
+      term: query,
+      media: "music",
+      entity: "song",
+      limit: "5",
+    })
+  );
+
+  let metadata: Metadata = {
+    title: "Zook",
+  };
+
+  if (!error) {
+    const { results: tracks } = data;
+
+    const firstTrack = tracks[0];
+    const trackReleaseYear = getTrackReleaseYear(firstTrack);
+
+    metadata = {
+      title: firstTrack.trackName,
+      description: `${firstTrack.artistName}
+              ${firstTrack.collectionName} 
+              ${firstTrack.primaryGenreName} &bull; ${trackReleaseYear}
+          `,
+      openGraph: {
+        images: [firstTrack.artworkUrl100!],
+      },
+    };
+  }
+
+  return metadata;
 }
 
 export default async function Music({

@@ -1,23 +1,49 @@
 import ResultsPage from "@/components/pages/ResultsPage";
 import ResultsShell from "@/components/ResultsShell";
-import { DdgResponse } from "@/lib/types";
+import { getResults } from "@/lib/ddg";
+import { Metadata } from "next";
 
-export default async function Page({
-  searchParams,
-}: {
+interface Props {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}) {
+}
+
+export async function generateMetadata({ searchParams }: Props) {
+  const query = (await searchParams).q as string;
+
+  const { data, error } = await getResults(query);
+
+  let metadata: Metadata = {
+    title: "Zook",
+  };
+
+  if (!error) {
+    metadata = {
+      title: data.Heading ?? "Zook",
+      description: data.Abstract,
+      openGraph: {
+        images: [`https://duckduckgo.com${data.Image}`],
+      },
+    };
+  }
+
+  return metadata;
+}
+
+export default async function Page({ searchParams }: Props) {
   const query = (await searchParams).q as string;
 
   if (query) {
-    const url = `https://api.duckduckgo.com?q=${query}&format=json`;
-    const data: DdgResponse = await (await fetch(url)).json();
+    const { data, error } = await getResults(query);
 
-    return (
-      <ResultsShell currentTab="default" query={query}>
-        <ResultsPage result={data} query={query} />
-      </ResultsShell>
-    );
+    if (!error) {
+      return (
+        <ResultsShell currentTab="default" query={query}>
+          <ResultsPage result={data} query={query} />
+        </ResultsShell>
+      );
+    }
+
+    return <div>Something went wrong! {error.message}</div>;
   }
 
   return (
