@@ -10,17 +10,15 @@ interface Props {
 export async function generateMetadata({ searchParams }: Props) {
   const query = (await searchParams).q as string;
 
-
   let metadata: Metadata = {
     title: "Zook",
   };
 
   if (!query) {
-    return metadata
+    return metadata;
   }
 
   const { data, error } = await getResults(query);
-
 
   if (!error) {
     metadata = {
