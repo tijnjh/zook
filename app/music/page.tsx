@@ -43,7 +43,7 @@ export async function generateMetadata({ searchParams }: Props) {
       title: firstTrack.trackName,
       description: `${firstTrack.artistName}
 ${firstTrack.collectionName} 
-${firstTrack.primaryGenreName} &bull; ${trackReleaseYear}`,
+${firstTrack.primaryGenreName} • ${trackReleaseYear}`,
       openGraph: {
         images: [firstTrack.artworkUrl100!],
       },
