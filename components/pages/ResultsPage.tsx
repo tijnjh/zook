@@ -66,45 +66,45 @@ export default function ResultsPage({
         </>
       )}
 
-      {result.RelatedTopics?.length ? (
-        <>
-          <h2 className="text-nord6/50">related queries</h2>
+      {result.RelatedTopics?.length
+        ? (
+          <>
+            <h2 className="text-nord6/50">related queries</h2>
 
-          <ul>
-            {result.RelatedTopics.map((topic) => {
-              if (!topic.FirstURL) {
+            <ul>
+              {result.RelatedTopics.map((topic) => {
+                if (!topic.FirstURL) {
+                  return null;
+                }
+
+                const q = topic.FirstURL.split("/")
+                  .reverse()[0]
+                  .replaceAll("_", "%20")
+                  .toLowerCase();
+
+                if (decodeURIComponent(q) !== query) {
+                  return (
+                    <li key={q} className="mb-6">
+                      <Link
+                        href={`/?q=${q}`}
+                        className="group flex items-center gap-2"
+                      >
+                        <SearchIcon className="size-4 shrink-0" />
+                        <div className="truncate">
+                          <span className="group-hover:underline truncate">
+                            {decodeURIComponent(q)}
+                          </span>
+                        </div>
+                      </Link>
+                    </li>
+                  );
+                }
                 return null;
-              }
-
-              const q = topic.FirstURL.split("/")
-                .reverse()[0]
-                .replaceAll("_", "%20")
-                .toLowerCase();
-
-              if (decodeURIComponent(q) !== query) {
-                return (
-                  <li key={q} className="mb-6">
-                    <Link
-                      href={`/?q=${q}`}
-                      className="group flex items-center gap-2"
-                    >
-                      <SearchIcon className="size-4 shrink-0" />
-                      <div className="truncate">
-                        <span className="group-hover:underline truncate">
-                          {decodeURIComponent(q)}
-                        </span>
-                      </div>
-                    </Link>
-                  </li>
-                );
-              }
-              return null;
-            })}
-          </ul>
-        </>
-      ) : (
-        <h3>No results found :(</h3>
-      )}
+              })}
+            </ul>
+          </>
+        )
+        : <h3>No results found :(</h3>}
     </>
   );
 }
