@@ -6,22 +6,22 @@
       "dependencies": {
         "@fontsource/inter": "^5.2.5",
         "babel-plugin-react-compiler": "^19.1.0-rc.2",
-        "easy-try-catch": "^0.1.4",
+        "easy-try-catch": "^0.2.0",
         "lucide-react": "^0.511.0",
-        "next": "15.3.3",
+        "next": "^15.3.3",
         "node-itunes-search": "^3.0.0",
-        "react": "^19.0.0",
-        "react-dom": "^19.0.0",
+        "react": "^19.1.0",
+        "react-dom": "^19.1.0",
         "react-medium-image-zoom": "^5.2.14",
         "tsuite": "^0.5.5",
       },
       "devDependencies": {
-        "@tailwindcss/postcss": "^4",
-        "@types/node": "^20",
-        "@types/react": "^19",
-        "@types/react-dom": "^19",
-        "tailwindcss": "^4",
-        "typescript": "^5",
+        "@tailwindcss/postcss": "^4.1.8",
+        "@types/node": "^20.17.57",
+        "@types/react": "^19.1.6",
+        "@types/react-dom": "^19.1.5",
+        "tailwindcss": "^4.1.8",
+        "typescript": "^5.8.3",
       },
     },
   },
@@ -174,7 +174,7 @@
 
     "detect-libc": ["detect-libc@2.0.4", "", {}, "sha512-3UDv+G9CsCKO1WKMGw9fwq/SWJYbI0c5Y7LU1AXYoDdbhE2AHQ6N6Nb34sG8Fj7T5APy8qXDCKuuIHd1BR0tVA=="],
 
-    "easy-try-catch": ["easy-try-catch@0.1.4", "", {}, "sha512-dsjrhp+MbIUkzaLhyaHE13FLkxEjH+k/w7dMPo/YTVGEv1w4zmvSf9iWcGGU7YUr3oRnbkTCHOfahpxPjkuTUQ=="],
+    "easy-try-catch": ["easy-try-catch@0.2.0", "", {}, "sha512-ZVFFJj/q2okP+7LjYpLEZTKcmcMuDRbEQ/T7v3B8HQ4mBlIN3DDnRfQ4MT9rsaGLzdVeZd604r+bxqKr2obfag=="],
 
     "enhanced-resolve": ["enhanced-resolve@5.18.1", "", { "dependencies": { "graceful-fs": "^4.2.4", "tapable": "^2.2.0" } }, "sha512-ZSW3ma5GkcQBIpwZTSRAI8N71Uuwgs93IezB7mf7R60tC8ZbJideoDNKjHn2O9KIlx6rkGTTEk1xUCK2E1Y2Yg=="],
 
