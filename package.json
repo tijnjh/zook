@@ -1,6 +1,5 @@
 {
-  "name": "zooking",
-  "version": "0.1.0",
+  "name": "zook",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -11,18 +10,18 @@
   "dependencies": {
     "@fontsource/inter": "^5.2.5",
     "babel-plugin-react-compiler": "^19.1.0-rc.2",
-    "easy-try-catch": "^0.2.0",
     "lucide-react": "^0.511.0",
     "next": "^15.3.3",
     "node-itunes-search": "^3.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-medium-image-zoom": "^5.2.14",
-    "tsuite": "^0.5.5"
+    "tsuite": "^0.6.4",
+    "typecatch": "^0.2.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.8",
-    "@types/node": "^20.17.57",
+    "@types/node": "^22.15.29",
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.5",
     "tailwindcss": "^4.1.8",

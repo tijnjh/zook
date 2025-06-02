@@ -1,5 +1,5 @@
 import ResultsShell from "@/components/ResultsShell";
-import { tryCatch } from "easy-try-catch";
+import { tryCatch } from "typecatch";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { ItunesResult, searchItunes } from "node-itunes-search";
